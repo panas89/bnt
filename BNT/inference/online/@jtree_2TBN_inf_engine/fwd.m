@@ -33,7 +33,9 @@ CPDclqs = engine.clq_ass_to_node(slice2);
 D = engine.in_clq;
 clqs = [D CPDclqs];
 
-[f.clpot, f.seppot] =  init_pot(engine.jtree_engine, clqs, pots, engine.pot_type, engine.observed);
+%[f.clpot, f.seppot] =  init_pot(engine.jtree_engine, clqs, pots, engine.pot_type, engine.observed);
+obs = find(~isemptycell(ev2(:)));
+[f.clpot, f.seppot] =  init_pot(engine.jtree_engine, clqs, pots, engine.pot_type, obs);
 [f.clpot, f.seppot] = collect_evidence(engine.jtree_engine, f.clpot, f.seppot);
 for c=1:length(f.clpot)
   [f.clpot{c}, ll(c)] = normalize_pot(f.clpot{c});
